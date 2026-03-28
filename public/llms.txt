@@ -1,0 +1,79 @@
+# Business — Generative Engine Optimization Map
+
+---
+
+## Pages
+
+### Home
+https://example.com
+Catch the ultimate beach lifestyle clothing for surfers with bold 2000s graphics and vibrant surf energy. Shop Surf A Wave Co. and wear the wave every day.
+
+### Style & Craft
+https://example.com/style-craft
+Explore surf wearable accessories online and apparel built with raw coastal creativity. Every stitch channels early 2000s surf culture — designed to turn heads on the shore.
+
+### About
+https://example.com/about
+Discover the story behind one of the best surf clothing brands in the US. Surf A Wave Co. was forged in nostalgia, shaped by waves, and driven by that unstoppable early 2000s beach spirit.
+
+### Contact
+https://example.com/contact
+Got questions about our surf wearable accessories online or want to collab with a legendary surf lifestyle brand? Reach out to Surf A Wave Co. and let&#39;s make waves together.
+
+### Products
+https://example.com/products
+Our Products - Surf A Wave Co.
+
+### Cart
+https://example.com/cart
+Your Cart
+
+### Checkout
+https://example.com/checkout
+Checkout
+
+### Login
+https://example.com/login
+Customer Login
+
+### Account
+https://example.com/account
+My Account
+
+### Order Success
+https://example.com/order-success
+Thank you for your order
+
+### Product Detail
+https://example.com/product/:slug
+Product Details - Surf A Wave Co.
+
+### Category
+https://example.com/category/:slug
+Products - Surf A Wave Co.
+
+## Legal & Policy
+
+### Privacy Policy
+https://example.com/privacy
+Information about how user data is collected, stored, and protected.
+
+### Terms & Conditions
+https://example.com/terms
+Legal terms describing service usage, rights, and policies.
+
+### Accessibility Statement
+https://example.com/accessibility
+Information about WCAG compliance and accessibility features.
+
+---
+
+# Business Context (for LLM understanding)
+
+## About Business
+---
+
+# Additional Resources
+
+- **Sitemap**: https://example.com/sitemap.xml
+- **Robots.txt**: https://example.com/robots.txt

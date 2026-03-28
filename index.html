@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>beach lifestyle clothing for surfers — Surf A Wave Co.</title>
+    <meta name="description" content="Catch the ultimate beach lifestyle clothing for surfers with bold 2000s graphics and vibrant surf energy. Shop Surf A Wave Co. and wear the wave every day.">
+    <meta name="keywords" content="beach lifestyle clothing for surfers, surf wear, best surf clothing brands in the US, retro surf fashion, 2000s surf streetwear">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: 'df58909b-03f1-4dc0-a605-844a3ec42cfd',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+    <meta property="og:title" content="beach lifestyle clothing for surfers — Surf A Wave Co.">
+  <meta property="og:description" content="Catch the ultimate beach lifestyle clothing for surfers with bold 2000s graphics and vibrant surf energy. Shop Surf A Wave Co. and wear the wave every day.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="beach lifestyle clothing for surfers — Surf A Wave Co.">
+  <meta name="twitter:description" content="Catch the ultimate beach lifestyle clothing for surfers with bold 2000s graphics and vibrant surf energy. Shop Surf A Wave Co. and wear the wave every day.">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css">
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+    <link rel="stylesheet" href="/styles.css">
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: var(--text-dark, #333) !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; position: relative !important; min-height: 44px !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; min-width: 0 !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; min-width: 0 !important; padding: 0 !important; line-height: inherit !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu, .navbar li:has(.sub-menu) > .sub-menu, #navMenu li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: auto !important; background: transparent !important; border: none !important; cursor: pointer !important; color: var(--text-light) !important; position: static !important; flex-shrink: 0 !important; align-self: stretch !important; z-index: 2 !important; padding: 0 !important; margin: 0 !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; color: var(--text-light) !important; }
+        .navbar .sub-menu li a, nav.navbar .sub-menu li a, .zappy-products-dropdown .sub-menu a { color: var(--text-light) !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+
+    <style id="mobile-lang-menu-deployed-css">
+    @media (max-width: 768px) {
+      .lang-switcher,
+      .nav-cta-container .lang-switcher,
+      .nav-container .lang-switcher,
+      .navbar .lang-switcher,
+      .navbar .nav-cta-container .lang-switcher,
+      .nav-icons-left .lang-switcher,
+      .nav-ecommerce-icons .lang-switcher { display: none !important; }
+      .mobile-lang-menu { width: 100%; border-top: 1px solid rgba(128,128,128,0.2); padding: 8px 0 0 0; margin-top: 8px; }
+      .mobile-lang-toggle { display: flex !important; align-items: center; justify-content: space-between; width: 100%; padding: 12px 16px; background: none; border: none; cursor: pointer; font-size: 15px; color: inherit; font-family: inherit; }
+      .mobile-lang-toggle::after { content: ''; display: inline-block; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform 0.3s ease; margin-left: 8px; }
+      .mobile-lang-toggle.expanded::after { transform: rotate(-135deg); }
+      .mobile-lang-options { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+      .mobile-lang-options.expanded { max-height: 300px; }
+      .mobile-lang-option { display: flex !important; align-items: center; gap: 10px; padding: 10px 24px; text-decoration: none; color: inherit; font-size: 14px; font-family: inherit; }
+      .mobile-lang-option:hover { background: rgba(128,128,128,0.1); }
+      .mobile-lang-option.active { font-weight: 600; opacity: 0.7; pointer-events: none; }
+      .mobile-lang-option img { width: 20px; height: 20px; border-radius: 50%; }
+    }
+    @media (min-width: 769px) {
+      .mobile-lang-menu { display: none !important; }
+    }
+    </style>
+
+    <style id="zappy-widget-visibility">
+      #mic-access-tool-general-button, .mic-access-tool-general-button,
+      #mic-init-access-tool .mic-access-tool-general-button, #mic-init-access-tool #mic-access-tool-general-button,
+      ._access-icon, #mic-access-tool-box, .mic-access-tool-box,
+      #mic-init-access-tool #mic-access-tool-box, div[id*="mic-access-tool-box"], ._access-menu {
+        display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important;
+      }
+    </style>
+</head>
+<body>
+
+
+    <div class="mobile-search-panel" id="mobile-search-panel">
+      <div class="search-wrapper">
+        <input type="text" id="mobile-search-input" placeholder="Search products..." autocomplete="off">
+        <button class="search-submit" id="mobile-search-submit" title="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+        </button>
+        <button class="close-search" id="close-mobile-search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+        </button>
+      </div>
+      <div class="search-results" id="mobile-search-results"></div>
+    </div>
+  
+<script>window.ZAPPY_WEBSITE_ID = "df58909b-03f1-4dc0-a605-844a3ec42cfd";window.ZAPPY_API_BASE = (window.location.pathname.includes('/preview') ? "https://api.zappy5.com" : "https://api.zappy5.com");</script>
+  <nav class="navbar">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+
+  <button class="phone-header-btn" data-phone="" aria-label="Call">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/business-logo.webp" alt="Surf A Wave Co." class="logo">
+      </a>
+    </div>
+
+    <ul class="nav-menu" id="navMenu">
+
+    <li class="menu-item-has-children zappy-products-dropdown">
+      <a href="/products">
+        Products
+        <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </a>
+      <ul class="sub-menu" id="zappy-nav-category-links">
+        <li><a href="/products">All Products</a></li>
+        <!-- Categories will be loaded dynamically -->
+      </ul>
+    </li>
+  <li><a href="/style-craft">Style &amp; Craft</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li></ul><div class="nav-ecommerce-icons nav-icons-left"><a href="/login" class="login-link nav-login" title="Login"><svg class="login-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></a><a href="#cart" class="cart-link nav-cart" id="cart-drawer-toggle" title="Cart"><svg class="cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg><span class="cart-count">0</span></a><div class="nav-search-box">
+    <input type="text" class="nav-search-input" id="nav-search-input" placeholder="Search products..." autocomplete="off">
+    <button class="nav-search-btn" id="nav-search-btn" title="Search">
+      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+    </button>
+    <div class="nav-search-results" id="nav-search-results"></div>
+  </div></div><div class="nav-ecommerce-icons nav-icons-right"><button class="nav-search-toggle" id="mobile-search-toggle" title="Search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg></button></div>
+
+    
+  </div>
+</nav>
+
+    <nav class="zappy-catalog-menu ltr" id="zappy-catalog-menu" dir="ltr" style="display:none">
+      <div class="catalog-menu-container">
+        <a href="/products" class="catalog-menu-item catalog-menu-all">All Products</a>
+        <div class="catalog-menu-categories" id="zappy-category-links">
+          <!-- Categories will be loaded dynamically -->
+        </div>
+      </div>
+    </nav>
+  
+<script>
+
+// Navbar Mobile Menu Toggle and Contrast Fix
+(function() {
+  // Use 'load' event instead of 'DOMContentLoaded' to ensure we run AFTER all other scripts
+  window.addEventListener('load', function() {
+    
+    // FIX MOBILE BUTTON CONTRAST
+    // Detect navbar background color and apply contrasting color to mobile buttons
+    const navbar = document.querySelector('.navbar, nav, header');
+    if (!navbar) {
+      console.log('[Navbar] Navbar element not found');
+      return;
+    }
+    
+    // DECLARE VARIABLES EARLY to avoid Temporal Dead Zone errors
+    // These are used in multiple places below
+    let mobileToggle = document.getElementById('mobileToggle') ||
+                       document.querySelector('.mobile-toggle') ||
+                       document.querySelector('.hamburger') ||
+                       document.querySelector('.hamburger-menu') ||
+                       document.querySelector('.menu-toggle') ||
+                       document.querySelector('.burger-menu') ||
+                       document.querySelector('[aria-label="Menu"]') ||
+                       document.querySelector('[aria-label="תפריט"]');
+    
+    const phoneBtn = document.querySelector('.phone-header-btn');
+    
+    const computedStyle = window.getComputedStyle(navbar);
+    let bgColor = computedStyle.backgroundColor;
+    
+    console.log('[Navbar] Initial navbar background:', bgColor);
+    
+    // Check if background is transparent or rgba with 0 alpha
+    const isTransparent = bgColor === 'transparent' || 
+                         bgColor === 'rgba(0, 0, 0, 0)' ||
+                         (bgColor.startsWith('rgba') && bgColor.includes(', 0)'));
+    
+    if (isTransparent) {
+      // Check for background-image or gradient
+      const bgImage = computedStyle.backgroundImage;
+      if (bgImage && bgImage !== 'none') {
+        console.log('[Navbar] Navbar has background image/gradient, using dark text');
+        bgColor = 'rgb(240, 240, 240)'; // Assume light background
+      } else {
+        // Transparent navbar - check body background
+        const bodyBg = window.getComputedStyle(document.body).backgroundColor;
+        console.log('[Navbar] Navbar transparent, using body background:', bodyBg);
+        bgColor = bodyBg;
+      }
+    }
+    
+    // Calculate luminance to determine if background is light or dark
+    const rgb = bgColor.match(/\d+/g);
+    if (rgb && rgb.length >= 3) {
+      const r = parseInt(rgb[0]);
+      const g = parseInt(rgb[1]);
+      const b = parseInt(rgb[2]);
+      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+      
+      // Mobile button colors are set by Claude's AI-generated CSS (same as .nav-menu a)
+      // No dynamic color overrides needed - colors come from the generated navbar CSS
+      console.log('[Navbar] Mobile button colors preserved from Claude CSS (luminance:', luminance.toFixed(2) + ')');
+      
+      // FIX ICON SIZES - Ensure SVGs are properly sized and visible
+      // INJECT CRITICAL CSS TO OVERRIDE ANY CONFLICTING RULES
+      const criticalCSS = document.createElement('style');
+      criticalCSS.id = 'zappy-mobile-nav-fix';
+      const htmlLang = document.documentElement.lang || 'en';
+      const htmlDir = document.documentElement.dir || 'ltr';
+      // Check both dir attribute AND lang for RTL detection
+      // dir="rtl" is the most reliable indicator
+      const isRTL = htmlDir === 'rtl' || htmlLang === 'he' || htmlLang === 'ar';
+      
+      criticalCSS.textContent = `
+        /* Hide mobile buttons on desktop, show only on mobile */
+        @media (min-width: 769px) {
+          .mobile-toggle,
+          .phone-header-btn {
+            display: none !important;
+          }
+        }
+        
+        /* Show and position mobile buttons correctly on mobile */
+        @media (max-width: 768px) {
+          .mobile-toggle,
+          .phone-header-btn {
+            position: absolute !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            z-index: 1001 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 36px !important;
+            height: 36px !important;
+            border-radius: 50% !important;
+            border: none !important;
+            cursor: pointer !important;
+            padding: 6px !important;
+            background: none !important;
+            color: var(--nav-text, var(--text-light)) !important;
+          }
+          
+          /* LTR positioning (default): hamburger LEFT, phone RIGHT */
+          html:not([dir="rtl"]):not([lang="he"]):not([lang="ar"]) .mobile-toggle,
+          html[dir="ltr"] .mobile-toggle {
+            left: 12px !important;
+            right: auto !important;
+          }
+          html:not([dir="rtl"]):not([lang="he"]):not([lang="ar"]) .phone-header-btn,
+          html[dir="ltr"] .phone-header-btn {
+            right: 12px !important;
+            left: auto !important;
+          }
+          
+          /* RTL positioning: hamburger RIGHT, phone LEFT */
+          html[dir="rtl"] .mobile-toggle,
+          html[lang="he"] .mobile-toggle,
+          html[lang="ar"] .mobile-toggle {
+            right: 12px !important;
+            left: auto !important;
+          }
+          html[dir="rtl"] .phone-header-btn,
+          html[lang="he"] .phone-header-btn,
+          html[lang="ar"] .phone-header-btn {
+            left: 12px !important;
+            right: auto !important;
+          }
+          
+          /* CRITICAL: Ensure nav-container has min-height on mobile */
+          /* All children are positioned absolutely/fixed on mobile, so height:auto collapses to 0 */
+          .nav-container {
+            min-height: 70px !important;
+            position: relative !important;
+          }
+          
+          /* Ensure SVG icons are properly sized and inherit color */
+          .mobile-toggle svg,
+          .phone-header-btn svg {
+            width: 24px !important;
+            height: 24px !important;
+            /* Don't force display - let JavaScript control hamburger/close toggle */
+          }
+          
+          /* Reset nav-cta-container on mobile - remove desktop box-shadow/padding */
+          /* that creates a visible ghost box when CTA button is hidden */
+          .nav-cta-container {
+            box-shadow: none !important;
+            padding: 0 !important;
+          }
+          
+          /* Hide nav-cta-container entirely on mobile when there's no lang-switcher */
+          /* (only the CTA button is inside, and it's hidden on mobile) */
+          .nav-cta-container:not(:has(.lang-switcher)) {
+            display: none !important;
+          }
+          
+          /* CRITICAL: Prevent hero image fade gradient from bleeding over headline text */
+          /* The .image-fade-gradient has bottom: -30px (extends below parent) */
+          /* On mobile stacked layout, this overlaps the h1 text below the image */
+          .hero-image-column {
+            overflow: hidden !important;
+          }
+          .image-fade-gradient {
+            bottom: 0 !important;
+          }
+          
+          /* Hide desktop language switcher on mobile - hamburger menu handles it */
+          /* High specificity to override stored CSS */
+          .lang-switcher,
+          .nav-cta-container .lang-switcher,
+          .nav-container .lang-switcher,
+          .navbar .lang-switcher,
+          .navbar .nav-cta-container .lang-switcher {
+            display: none !important;
+          }
+        }
+      `;
+      
+      // Remove existing fix if present and inject new one
+      const existing = document.getElementById('zappy-mobile-nav-fix');
+      if (existing) existing.remove();
+      document.head.appendChild(criticalCSS);
+      
+      console.log('[Navbar] Critical CSS injected for mobile nav positioning');
+      
+      // ONLY apply inline positioning styles on mobile viewport
+      // On desktop, the CSS handles hiding these buttons with display: none
+      // Inline styles were breaking desktop layout by overriding CSS
+      const isMobileViewport = window.innerWidth <= 768;
+      
+      if (mobileToggle) {
+        // Icon sizing applies to all viewports for consistency
+        const hamburgerIcon = mobileToggle.querySelector('.hamburger-icon');
+        const closeIcon = mobileToggle.querySelector('.close-icon');
+        
+        if (hamburgerIcon) {
+          hamburgerIcon.style.setProperty('width', '24px', 'important');
+          hamburgerIcon.style.setProperty('height', '24px', 'important');
+          hamburgerIcon.style.setProperty('display', 'block', 'important'); // Show hamburger by default
+        }
+        if (closeIcon) {
+          closeIcon.style.setProperty('width', '24px', 'important');
+          closeIcon.style.setProperty('height', '24px', 'important');
+          closeIcon.style.setProperty('display', 'none', 'important'); // Hide close icon by default
+        }
+        
+        // ONLY set positioning inline styles on mobile
+        if (isMobileViewport) {
+          mobileToggle.style.setProperty('position', 'absolute', 'important');
+          mobileToggle.style.setProperty('top', '50%', 'important');
+          mobileToggle.style.setProperty('transform', 'translateY(-50%)', 'important');
+          mobileToggle.style.setProperty('z-index', '1001', 'important');
+          
+          // Clear any inline left/right so CSS can take over based on html[dir]
+          mobileToggle.style.removeProperty('left');
+          mobileToggle.style.removeProperty('right');
+          
+          console.log('[Navbar] Mobile toggle positioning applied (mobile viewport)');
+        } else {
+          // On desktop, clear any positioning styles to let CSS handle it
+          mobileToggle.style.removeProperty('position');
+          mobileToggle.style.removeProperty('top');
+          mobileToggle.style.removeProperty('transform');
+          mobileToggle.style.removeProperty('z-index');
+          mobileToggle.style.removeProperty('left');
+          mobileToggle.style.removeProperty('right');
+          console.log('[Navbar] Desktop viewport - cleared mobile toggle inline positioning');
+        }
+      }
+      
+      if (phoneBtn) {
+        // Icon sizing applies to all viewports
+        const phoneIcon = phoneBtn.querySelector('svg');
+        if (phoneIcon) {
+          phoneIcon.style.width = '24px';
+          phoneIcon.style.height = '24px';
+          phoneIcon.setAttribute('width', '24');
+          phoneIcon.setAttribute('height', '24');
+        }
+        
+        // ONLY set positioning inline styles on mobile
+        if (isMobileViewport) {
+          phoneBtn.style.setProperty('position', 'absolute', 'important');
+          phoneBtn.style.setProperty('top', '50%', 'important');
+          phoneBtn.style.setProperty('transform', 'translateY(-50%)', 'important');
+          phoneBtn.style.setProperty('z-index', '1001', 'important');
+          
+          // Clear any inline left/right so CSS can take over based on html[dir]
+          phoneBtn.style.removeProperty('left');
+          phoneBtn.style.removeProperty('right');
+          
+          console.log('[Navbar] Phone button positioning applied (mobile viewport)');
+        } else {
+          // On desktop, clear any positioning styles to let CSS handle it
+          phoneBtn.style.removeProperty('position');
+          phoneBtn.style.removeProperty('top');
+          phoneBtn.style.removeProperty('transform');
+          phoneBtn.style.removeProperty('z-index');
+          phoneBtn.style.removeProperty('left');
+          phoneBtn.style.removeProperty('right');
+          console.log('[Navbar] Desktop viewport - cleared phone button inline positioning');
+        }
+      }
+    } else {
+      console.log('[Navbar] Could not parse background color:', bgColor);
+    }
+    
+    // MOBILE MENU TOGGLE
+    // Re-query in case DOM changed (mobileToggle already declared at top of function)
+    mobileToggle = document.getElementById('mobileToggle') ||
+                   document.querySelector('.mobile-toggle') ||
+                   document.querySelector('.hamburger') ||
+                   document.querySelector('.hamburger-menu') ||
+                   document.querySelector('.menu-toggle') ||
+                   document.querySelector('.burger-menu') ||
+                   document.querySelector('[aria-label="Menu"]') ||
+                   document.querySelector('[aria-label="תפריט"]');
+    
+    // EXPANDED SEARCH: Find nav menu by ID or class
+    const navMenu = document.getElementById('navMenu') ||
+                  document.querySelector('.nav-menu') ||
+                  document.querySelector('.nav-links') ||
+                  document.querySelector('nav ul:not(.submenu)');
+    
+    if (!mobileToggle || !navMenu) {
+      console.log('[Navbar] Mobile toggle or menu not found:', { toggle: !!mobileToggle, menu: !!navMenu });
+      return;
+    }
+    
+    // Ensure navMenu has ID for CSS targeting
+    if (!navMenu.id) {
+      navMenu.id = 'navMenu';
+    }
+    
+    console.log('[Navbar] Initializing mobile menu...');
+    
+    // Remove any existing event listeners by cloning the button
+    const newToggle = mobileToggle.cloneNode(true);
+    mobileToggle.parentNode.replaceChild(newToggle, mobileToggle);
+    
+    // Toggle menu on button click - use newToggle now
+    newToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const hamburgerIcon = this.querySelector('.hamburger-icon');
+      const closeIcon = this.querySelector('.close-icon');
+      const isActive = navMenu.classList.contains('active');
+      
+      if (isActive) {
+        // Close menu
+        navMenu.classList.remove('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'block', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'none', 'important');
+        document.body.style.overflow = '';
+        console.log('[Navbar] Menu closed');
+      } else {
+        // Open menu
+        navMenu.classList.add('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'none', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'block', 'important');
+        document.body.style.overflow = 'hidden';
+        console.log('[Navbar] Menu opened');
+      }
+    });
+    
+    // Close menu when clicking nav links (but NOT dropdown toggles)
+    const navLinks = navMenu.querySelectorAll('a');
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        // Don't close if it's a dropdown child (unless it's a real navigation link)
+        if (this.getAttribute('href') === '#') return;
+        
+        const hamburgerIcon = newToggle.querySelector('.hamburger-icon');
+        const closeIcon = newToggle.querySelector('.close-icon');
+        
+        navMenu.classList.remove('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'block', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'none', 'important');
+        document.body.style.overflow = '';
+        console.log('[Navbar] Menu closed (link clicked)');
+      });
+    });
+    
+    // DROPDOWN MENU TOGGLE (for mobile and touch devices)
+    var dropdownToggles = navMenu.querySelectorAll('.dropdown-toggle');
+    dropdownToggles.forEach(function(toggle) {
+      toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var parent = this.closest('.nav-dropdown');
+        if (!parent) return;
+        
+        // Close other open dropdowns at the same level
+        var siblings = parent.parentNode.querySelectorAll('.nav-dropdown.open');
+        siblings.forEach(function(sib) {
+          if (sib !== parent) sib.classList.remove('open');
+        });
+        
+        parent.classList.toggle('open');
+        console.log('[Navbar] Dropdown toggled:', parent.classList.contains('open') ? 'open' : 'closed');
+      });
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-dropdown')) {
+        var openDropdowns = document.querySelectorAll('.nav-dropdown.open');
+        openDropdowns.forEach(function(dd) { dd.classList.remove('open'); });
+      }
+    });
+    
+    console.log('[Navbar] Dropdown handlers initialized for ' + dropdownToggles.length + ' dropdowns');
+    
+    // Phone button functionality (phoneBtn already declared at top of function)
+    if (phoneBtn) {
+      phoneBtn.addEventListener('click', function() {
+        // Get phone number from placeholder in page or use default
+        const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+        const phoneNumber = phoneLinks.length > 0 
+          ? phoneLinks[0].getAttribute('href').replace('tel:', '')
+          : '[business_phone]';
+        
+        window.location.href = 'tel:' + phoneNumber;
+        console.log('[Navbar] Phone button clicked');
+      });
+    }
+    
+    console.log('[Navbar] Mobile menu initialized successfully');
+    
+    // === WHATSAPP BUTTON VISIBILITY FIX ===
+    // Ensure WhatsApp floating button is hidden on desktop and visible on mobile
+    // IMPORTANT: Only target the floating button by its class, NOT generic wa.me links
+    const handleWhatsAppVisibility = function() {
+      const whatsappBtn = document.querySelector('.whatsapp-float');
+      if (whatsappBtn) {
+        const isDesktop = window.innerWidth >= 769;
+        if (isDesktop) {
+          whatsappBtn.style.setProperty('display', 'none', 'important');
+          whatsappBtn.style.setProperty('visibility', 'hidden', 'important');
+          whatsappBtn.style.setProperty('opacity', '0', 'important');
+          whatsappBtn.style.setProperty('pointer-events', 'none', 'important');
+          console.log('[WhatsApp] Button hidden on desktop');
+        } else {
+          whatsappBtn.style.removeProperty('display');
+          whatsappBtn.style.removeProperty('visibility');
+          whatsappBtn.style.removeProperty('opacity');
+          whatsappBtn.style.removeProperty('pointer-events');
+          console.log('[WhatsApp] Button visible on mobile');
+        }
+      }
+    };
+    
+    // Run on load
+    handleWhatsAppVisibility();
+    
+    // Run on resize with debouncing
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(handleWhatsAppVisibility, 100);
+    });
+  });
+})();
+
+</script>
+  
+  <main>
+    <section class="home-hero-section" data-layout-spec="Home-hero" data-hero-type="fullscreen-scrim">
+  <!-- Background Image -->
+  <div class="home-hero-bg">
+    <img data-hero-bg="true" data-placeholder="home-hero-image-1" data-context="Cinematic wide-angle shoreline at golden hour, California beach with gentle waves rolling onto warm sand, a weathered wooden boardwalk visible on one side, surfers silhouetted in the distance, rich amber and deep ocean-blue tones, subtle film grain texture, editorial surf lifestyle photography, early 2000s nostalgic feel, vast open sky with soft clouds, horizontal composition leaving right side open to show ocean horizon" width="1200" height="700" src="/assets/site-home-hero-image-1.webp" alt="Golden hour shoreline with surfers and boardwalk for Surf A Wave Co." class="home-hero-img">
+  </div>
+
+  <!-- Scrim Overlay -->
+  <div class="home-hero-scrim" aria-hidden="true"></div>
+
+  <!-- Content Overlay -->
+  <div class="home-hero-content">
+    <div class="home-hero-inner">
+      <p class="home-hero-eyebrow">Est. Early 2000s &nbsp;·&nbsp; Beach to Street</p>
+      <h1 class="home-hero-h1">
+        Ride the Wave,<br>
+        <em class="home-hero-script">wear the vibe</em>
+      </h1>
+      <h3 class="home-hero-subtitle">
+        Bold graphics, effortless coast living — beach-to-street energy
+        channelled through surf wearables rooted in early-2000s nostalgia.
+      </h3>
+      <div class="home-hero-ctas">
+        <a href="/collection" class="btn-primary home-hero-btn-primary">Discover the Vibe</a>
+        <a href="/contact" class="btn-secondary home-hero-btn-secondary">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Wave Divider -->
+  <div class="home-hero-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Foamy speckle dots -->
+      <circle cx="120" cy="28" r="2.2" fill="#EEF5F7" opacity="0.55"></circle>
+      <circle cx="240" cy="18" r="1.5" fill="#EEF5F7" opacity="0.4"></circle>
+      <circle cx="380" cy="32" r="1.8" fill="#EEF5F7" opacity="0.45"></circle>
+      <circle cx="540" cy="22" r="2.5" fill="#EEF5F7" opacity="0.35"></circle>
+      <circle cx="680" cy="30" r="1.6" fill="#EEF5F7" opacity="0.5"></circle>
+      <circle cx="820" cy="16" r="2" fill="#EEF5F7" opacity="0.4"></circle>
+      <circle cx="960" cy="26" r="1.4" fill="#EEF5F7" opacity="0.45"></circle>
+      <circle cx="1100" cy="20" r="2.2" fill="#EEF5F7" opacity="0.38"></circle>
+      <circle cx="1280" cy="30" r="1.7" fill="#EEF5F7" opacity="0.5"></circle>
+      <circle cx="1360" cy="18" r="1.3" fill="#EEF5F7" opacity="0.4"></circle>
+      <!-- Main wave fill (bottom) -->
+      <path d="M0,90 L0,52 Q60,38 120,48 T240,42 Q310,36 380,50 T520,44 Q600,38 680,52 T820,44 Q900,36 980,50 T1120,42 Q1200,36 1280,50 T1380,46 L1440,48 L1440,90 Z" fill="#F7F4EE"></path>
+      <!-- Secondary softer wave for depth -->
+      <path d="M0,90 L0,65 Q80,58 160,66 T320,60 Q420,54 520,64 T700,58 Q800,52 900,62 T1080,56 Q1180,50 1280,60 T1440,58 L1440,90 Z" fill="#F7F4EE" opacity="0.6"></path>
+    </svg>
+  </div>
+</section>
+
+    <section class="featured-products-section" id="featured-products" data-zappy-dynamic="true">
+      <div class="container">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="product-grid featured-grid" id="zappy-featured-products">
+          <div class="loading-products">Loading products...</div>
+        </div>
+        <div class="view-all-products">
+          <a href="/products" class="btn btn-primary">View All Products →</a>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="featured-categories-section" id="featured-categories" data-zappy-dynamic="true">
+      <div class="container">
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="category-blocks" id="zappy-featured-categories">
+          <div class="loading-categories">Loading products...</div>
+        </div>
+      </div>
+    </section>
+  
+
+<section class="home-brand-story-section" data-layout-spec="Home-brand-story">
+  <!-- Aquatic speckling background texture -->
+  <div class="hbs-texture" aria-hidden="true"></div>
+
+  <!-- Whale shark line drawing decoration -->
+  <div class="hbs-whale-shark" aria-hidden="true">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 420 180" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <!-- Whale shark body -->
+      <path d="M10,95 Q40,60 90,75 Q130,88 160,70 Q200,50 250,65 Q300,80 340,60 Q370,48 395,55 Q410,60 415,70 Q418,78 410,88 Q400,100 380,105 Q340,115 300,108 Q260,100 220,112 Q180,124 140,118 Q100,112 60,120 Q35,126 18,115 Z" stroke="rgba(36,58,84,0.12)" stroke-width="1.2" fill="none"></path>
+      <!-- Tail fin -->
+      <path d="M395,55 Q408,35 415,20 M395,55 Q412,70 418,85" stroke="rgba(36,58,84,0.12)" stroke-width="1.2" fill="none"></path>
+      <!-- Dorsal fin -->
+      <path d="M220,65 Q235,30 255,50" stroke="rgba(36,58,84,0.12)" stroke-width="1.2" fill="none"></path>
+      <!-- Pectoral fin -->
+      <path d="M160,70 Q155,100 140,118" stroke="rgba(36,58,84,0.12)" stroke-width="1.2" fill="none"></path>
+      <!-- Gill slits -->
+      <path d="M95,76 Q98,88 95,100" stroke="rgba(36,58,84,0.10)" stroke-width="1" fill="none"></path>
+      <path d="M108,73 Q111,86 108,98" stroke="rgba(36,58,84,0.10)" stroke-width="1" fill="none"></path>
+      <path d="M121,71 Q124,84 121,96" stroke="rgba(36,58,84,0.10)" stroke-width="1" fill="none"></path>
+      <!-- Spots pattern -->
+      <circle cx="180" cy="85" r="3" fill="rgba(36,58,84,0.07)"></circle>
+      <circle cx="210" cy="92" r="2.5" fill="rgba(36,58,84,0.07)"></circle>
+      <circle cx="240" cy="80" r="3.5" fill="rgba(36,58,84,0.07)"></circle>
+      <circle cx="270" cy="88" r="2" fill="rgba(36,58,84,0.07)"></circle>
+      <circle cx="300" cy="78" r="3" fill="rgba(36,58,84,0.07)"></circle>
+      <circle cx="195" cy="100" r="2" fill="rgba(36,58,84,0.07)"></circle>
+      <circle cx="225" cy="105" r="3" fill="rgba(36,58,84,0.07)"></circle>
+      <circle cx="258" cy="98" r="2.5" fill="rgba(36,58,84,0.07)"></circle>
+      <!-- Eye -->
+      <circle cx="65" cy="88" r="4" stroke="rgba(36,58,84,0.15)" stroke-width="1" fill="none"></circle>
+      <circle cx="65" cy="88" r="1.5" fill="rgba(36,58,84,0.15)"></circle>
+      <!-- Mouth -->
+      <path d="M12,95 Q18,100 28,97" stroke="rgba(36,58,84,0.12)" stroke-width="1" fill="none"></path>
+    </svg>
+  </div>
+
+  <div class="hbs-container">
+    <div class="hbs-grid">
+
+      <!-- LEFT: Content Column -->
+      <div class="hbs-content">
+        <div class="hbs-label">Our Story</div>
+
+        <h2 class="hbs-heading">Where the<br><span class="hbs-script">Wave Begins</span></h2>
+
+        <p class="hbs-intro">Surf A Wave Co. was born from the sun-bleached boardwalks and buzzing beach towns of the early 2000s — a moment when surf culture crashed headlong into streetwear confidence and never looked back. We design beach lifestyle clothing for surfers who carry that spirit wherever they go, whether they're paddling out at dawn or rolling through the city after dark.</p>
+
+        <div class="hbs-rule" aria-hidden="true"></div>
+
+        <div class="hbs-narratives">
+
+          <div class="hbs-narrative-item">
+            <div class="hbs-narrative-icon" aria-hidden="true">
+              <svg data-element-type="icon" data-icon-type="svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+                <path d="M4,22 Q8,10 16,8 Q24,6 28,14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"></path>
+                <path d="M2,26 Q10,16 18,18 Q24,20 30,14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"></path>
+                <circle cx="16" cy="14" r="3" stroke="currentColor" stroke-width="1.5" fill="none"></circle>
+              </svg>
+            </div>
+            <div class="hbs-narrative-text">
+              <h3 class="hbs-narrative-title">Bold Graphics</h3>
+              <p>Every piece channels the raw energy of early-millennium surf labels — oversized prints, sun-soaked palettes, and graphic storytelling that wears its attitude on the outside.</p>
+            </div>
+          </div>
+
+          <div class="hbs-narrative-item">
+            <div class="hbs-narrative-icon" aria-hidden="true">
+              <svg data-element-type="icon" data-icon-type="svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+                <rect x="6" y="18" width="20" height="10" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"></rect>
+                <path d="M10,18 L10,12 Q10,6 16,6 Q22,6 22,12 L22,18" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"></path>
+                <path d="M6,22 Q16,20 26,22" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <div class="hbs-narrative-text">
+              <h3 class="hbs-narrative-title">Beach to Street Ease</h3>
+              <p>Crafted for transition — from salt water to sidewalk without missing a beat. Our cuts and fabrics move with you, blending laid-back surf wear with the kind of effortless cool that turns heads on any block.</p>
+            </div>
+          </div>
+
+          <div class="hbs-narrative-item">
+            <div class="hbs-narrative-icon" aria-hidden="true">
+              <svg data-element-type="icon" data-icon-type="svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+                <path d="M16,4 L18.5,11 L26,11 L20,15.5 L22.5,22.5 L16,18 L9.5,22.5 L12,15.5 L6,11 L13.5,11 Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"></path>
+                <circle cx="16" cy="28" r="1.5" fill="currentColor"></circle>
+              </svg>
+            </div>
+            <div class="hbs-narrative-text">
+              <h3 class="hbs-narrative-title">Nostalgic Energy</h3>
+              <p>We bottle the feeling of a summer that never ends — the crackle of a CD walkman, the smell of sunscreen on warm concrete, and the thrill of catching your first real wave. That's the Surf A Wave Co. state of mind.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RIGHT: Imagery Column -->
+      <div class="hbs-imagery">
+        <div class="hbs-image-stack">
+
+          <!-- Main large image -->
+          <figure class="hbs-main-image-wrap">
+            <img data-placeholder="home-brand-story-image-1" data-context="A sun-drenched lifestyle photograph of a surfer in vibrant early-2000s surf apparel — bold graphic tee and board shorts — carrying a surfboard on a wooden pier at golden hour, ocean in background, warm nostalgic tones, editorial fashion photography style for a surf lifestyle clothing brand" width="560" height="680" src="/assets/site-home-brand-story-image-1.webp" alt="Surfer in Surf A Wave Co. apparel on a sun-drenched pier at golden hour" class="hbs-main-image">
+            <!-- Subtle ocean scrim -->
+            <div class="hbs-image-scrim" aria-hidden="true"></div>
+          </figure>
+
+          <!-- Postcard tile -->
+          <figure class="hbs-postcard-wrap">
+            <div class="hbs-postcard-inner">
+              <img data-placeholder="home-brand-story-image-2" data-context="A close-up postcard-style snapshot of retro surf wearable accessories — a folded graphic tee with bold 2000s surf brand print, a wax comb, and a vintage sticker — laid on a sandy beach towel, warm bleached-out tones, nostalgic early 2000s surf culture aesthetic" width="220" height="200" src="/assets/site-home-brand-story-image-2.webp" alt="Retro surf accessories and Surf A Wave Co. graphic tee on a beach towel" class="hbs-postcard-image">
+              <div class="hbs-postcard-stamp" aria-hidden="true">
+                <span>SAW</span>
+                <span class="hbs-stamp-year">2000</span>
+              </div>
+            </div>
+          </figure>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom scalloped postcard-cut curve divider -->
+  <div class="hbs-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Ink-like thin outline on the scallop edge -->
+      <path d="M0,32 Q25,14 50,32 Q75,50 100,32 Q125,14 150,32 Q175,50 200,32 Q225,14 250,32 Q275,50 300,32 Q325,14 350,32 Q375,50 400,32 Q425,14 450,32 Q475,50 500,32 Q525,14 550,32 Q575,50 600,32 Q625,14 650,32 Q675,50 700,32 Q725,14 750,32 Q775,50 800,32 Q825,14 850,32 Q875,50 900,32 Q925,14 950,32 Q975,50 1000,32 Q1025,14 1050,32 Q1075,50 1100,32 Q1125,14 1150,32 Q1175,50 1200,32" stroke="rgba(71,99,123,0.28)" stroke-width="1.2" fill="#1D3A52"></path>
+      <!-- Filled scallop shape filling the bottom -->
+      <path d="M0,90 L0,32 Q25,14 50,32 Q75,50 100,32 Q125,14 150,32 Q175,50 200,32 Q225,14 250,32 Q275,50 300,32 Q325,14 350,32 Q375,50 400,32 Q425,14 450,32 Q475,50 500,32 Q525,14 550,32 Q575,50 600,32 Q625,14 650,32 Q675,50 700,32 Q725,14 750,32 Q775,50 800,32 Q825,14 850,32 Q875,50 900,32 Q925,14 950,32 Q975,50 1000,32 Q1025,14 1050,32 Q1075,50 1100,32 Q1125,14 1150,32 Q1175,50 1200,32 L1200,90 Z" fill="#1D3A52"></path>
+    </svg>
+  </div>
+
+</section>
+
+<section class="home-showcase-section" data-layout-spec="Home-showcase">
+  <!-- Star speckle decoration -->
+  <div class="showcase-speckles" aria-hidden="true">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="120" cy="80" r="1.5" fill="rgba(167,200,218,0.4)"></circle>
+      <circle cx="340" cy="160" r="1" fill="rgba(167,200,218,0.3)"></circle>
+      <circle cx="580" cy="50" r="2" fill="rgba(167,200,218,0.25)"></circle>
+      <circle cx="820" cy="130" r="1.5" fill="rgba(167,200,218,0.35)"></circle>
+      <circle cx="1050" cy="70" r="1" fill="rgba(167,200,218,0.3)"></circle>
+      <circle cx="200" cy="300" r="1" fill="rgba(167,200,218,0.2)"></circle>
+      <circle cx="960" cy="220" r="1.5" fill="rgba(167,200,218,0.3)"></circle>
+      <circle cx="70" cy="420" r="1" fill="rgba(167,200,218,0.25)"></circle>
+      <circle cx="1140" cy="380" r="2" fill="rgba(167,200,218,0.2)"></circle>
+      <circle cx="450" cy="480" r="1" fill="rgba(167,200,218,0.3)"></circle>
+      <circle cx="700" cy="520" r="1.5" fill="rgba(167,200,218,0.25)"></circle>
+      <circle cx="880" cy="470" r="1" fill="rgba(167,200,218,0.35)"></circle>
+      <circle cx="160" cy="550" r="1.5" fill="rgba(167,200,218,0.2)"></circle>
+      <circle cx="1080" cy="500" r="1" fill="rgba(167,200,218,0.3)"></circle>
+      <circle cx="310" cy="390" r="2" fill="rgba(167,200,218,0.15)"></circle>
+      <circle cx="650" cy="200" r="1" fill="rgba(167,200,218,0.4)"></circle>
+    </svg>
+  </div>
+
+  <div class="showcase-container">
+    <!-- Centered Title Area -->
+    <div class="showcase-header">
+      <p class="showcase-eyebrow">The Collection</p>
+      <h2 class="showcase-title">Wear the <em class="showcase-script">Wave</em></h2>
+      <p class="showcase-subtitle">Three moods. One ocean. Surf wear that lives between the shore and the street.</p>
+    </div>
+
+    <!-- Three-Panel Staggered Grid -->
+    <div class="showcase-grid">
+      <!-- Panel 1: Dawn Patrol — large, anchored start -->
+      <article class="showcase-tile showcase-tile--large">
+        <div class="showcase-tile-img-wrap">
+          <img data-placeholder="home-showcase-image-1" data-context="Early morning surf session at golden hour — a surfer in loose board shorts and a faded graphic tee stands on the beach holding their board, warm amber light casting long shadows on wet sand, 2000s retro surf photography aesthetic, film grain, deep marine tones, editorial fashion feel" width="600" height="760" src="/assets/site-home-showcase-image-1.webp" alt="Dawn Patrol surf lifestyle look — early morning beach session">
+          <div class="showcase-tile-scrim"></div>
+        </div>
+        <div class="showcase-tile-caption">
+          <h3 class="showcase-tile-h3">Dawn Patrol</h3>
+          <p class="showcase-tile-desc">First light, salt air, and the quiet confidence of someone who was already in the water before the world woke up.</p>
+        </div>
+      </article>
+
+      <!-- Panel 2: Boardwalk Nights — elevated end -->
+      <article class="showcase-tile showcase-tile--elevated">
+        <div class="showcase-tile-img-wrap">
+          <img data-placeholder="home-showcase-image-2" data-context="Night boardwalk surf lifestyle fashion — model in a bold graphic oversized hoodie and cargo shorts, neon boardwalk lights reflecting on wet pavement, vibrant 2000s Y2K beach town nightlife energy, glossy editorial photography, deep navy and electric teal tones" width="600" height="500" src="/assets/site-home-showcase-image-2.webp" alt="Boardwalk Nights surf streetwear look">
+          <div class="showcase-tile-scrim"></div>
+        </div>
+        <div class="showcase-tile-caption">
+          <h3 class="showcase-tile-h3">Boardwalk Nights</h3>
+          <p class="showcase-tile-desc">When the sun drops and the boardwalk lights up — graphic layers, bold colour, and that after-session swagger.</p>
+        </div>
+      </article>
+
+      <!-- Panel 3: Sun-Faded Streetwear — centered beneath -->
+      <article class="showcase-tile showcase-tile--centered">
+        <div class="showcase-tile-img-wrap">
+          <img data-placeholder="home-showcase-image-3" data-context="Sun-faded streetwear surf fashion — model wearing a washed-out vintage surf brand tee, relaxed fit jeans with frayed hems, and worn canvas sneakers, leaning against a sun-bleached wooden fence near the beach, 2000s nostalgic aesthetic, warm bleached tones, lifestyle editorial photography" width="600" height="480" src="/assets/site-home-showcase-image-3.webp" alt="Sun-Faded Streetwear — vintage surf lifestyle clothing">
+          <div class="showcase-tile-scrim"></div>
+        </div>
+        <div class="showcase-tile-caption">
+          <h3 class="showcase-tile-h3">Sun-Faded Streetwear</h3>
+          <p class="showcase-tile-desc">Bleached by a hundred sessions, broken in by the street — beach lifestyle clothing for surfers who never really left the coast.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- Bottom divider: watercolor diagonal fade from deep marine navy into pale sea-glass blue -->
+  <div class="showcase-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="dividerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#F7F7F5"></stop>
+          <stop offset="55%" stop-color="#EEF5F7"></stop>
+          <stop offset="100%" stop-color="#E2EEF3"></stop>
+        </linearGradient>
+      </defs>
+      <path d="M0,100 L0,48 Q80,28 180,42 Q280,56 380,32 Q480,10 560,38 Q640,62 740,28 Q840,6 940,34 Q1040,58 1120,30 L1200,22 L1200,100 Z" fill="#F7F4EE"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="home-values-section" data-layout-spec="Home-values">
+  <div class="home-values-container">
+
+    <!-- Intro Block -->
+    <div class="home-values-intro">
+      <small class="home-values-eyebrow">What We Stand For</small>
+      <h2 class="home-values-heading">Built for the <em class="home-values-script">wave chasers</em><br>who never clock out</h2>
+      <p class="home-values-subtext">Our beach lifestyle clothing for surfers is designed with one truth in mind: the ocean doesn't wait. Every piece we make carries the spirit of early-2000s surf culture — loud, free, and unapologetically coastal.</p>
+    </div>
+
+    <!-- Marine Illustration + Cards Row -->
+    <div class="home-values-body">
+
+      <!-- Marine Illustration -->
+      <div class="home-values-illustration-wrap" aria-hidden="true">
+        <svg class="home-values-marine-svg" data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 340 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Whale shark body -->
+          <ellipse cx="170" cy="118" rx="148" ry="58" fill="none" stroke="#A7C8DA" stroke-width="1.2" opacity="0.55"></ellipse>
+          <!-- Spots -->
+          <circle cx="130" cy="105" r="5" fill="#A7C8DA" opacity="0.25"></circle>
+          <circle cx="155" cy="118" r="4" fill="#A7C8DA" opacity="0.22"></circle>
+          <circle cx="180" cy="108" r="6" fill="#A7C8DA" opacity="0.2"></circle>
+          <circle cx="205" cy="122" r="4.5" fill="#A7C8DA" opacity="0.22"></circle>
+          <circle cx="225" cy="110" r="3.5" fill="#A7C8DA" opacity="0.18"></circle>
+          <circle cx="145" cy="130" r="3" fill="#A7C8DA" opacity="0.2"></circle>
+          <circle cx="195" cy="132" r="3.5" fill="#A7C8DA" opacity="0.18"></circle>
+          <!-- Tail fin -->
+          <path d="M310 118 Q328 95 338 105 Q328 118 338 130 Q328 140 310 118Z" fill="none" stroke="#A7C8DA" stroke-width="1.2" opacity="0.45"></path>
+          <!-- Dorsal fin -->
+          <path d="M195 60 Q210 38 228 58" fill="none" stroke="#A7C8DA" stroke-width="1.2" opacity="0.45"></path>
+          <!-- Pectoral fin -->
+          <path d="M148 118 Q130 148 110 155 Q128 140 135 120" fill="none" stroke="#A7C8DA" stroke-width="1.2" opacity="0.4"></path>
+          <!-- Eye -->
+          <circle cx="54" cy="112" r="4" fill="none" stroke="#A7C8DA" stroke-width="1" opacity="0.5"></circle>
+          <circle cx="54" cy="112" r="1.5" fill="#A7C8DA" opacity="0.45"></circle>
+          <!-- Mouth line -->
+          <path d="M22 118 Q38 125 54 120" fill="none" stroke="#A7C8DA" stroke-width="1" opacity="0.4"></path>
+          <!-- Water ripple lines -->
+          <path d="M20 168 Q60 160 100 168 Q140 176 180 168 Q220 160 260 168 Q300 176 330 168" fill="none" stroke="#A7C8DA" stroke-width="0.8" opacity="0.3"></path>
+          <path d="M40 182 Q80 174 120 182 Q160 190 200 182 Q240 174 280 182" fill="none" stroke="#A7C8DA" stroke-width="0.7" opacity="0.22"></path>
+          <!-- Brand label -->
+          <text x="170" y="208" text-anchor="middle" font-family="'Allura', cursive" font-size="13" fill="#5F7F99" opacity="0.55">surf a wave co.</text>
+        </svg>
+        <img data-placeholder="home-values-image-1" data-context="Aerial or slightly elevated editorial photograph of a surfer walking along a sun-bleached beach at golden hour, carrying a surfboard under their arm, wearing bold graphic surf wear in early-2000s style. The image has a warm, slightly nostalgic film-like quality with sea-glass blues and sandy tones. Soft bokeh ocean background. Premium lifestyle photography for a surf apparel brand." width="340" height="220" src="/assets/site-home-values-image-1.webp" alt="Surfer walking along the beach in Surf A Wave Co. apparel" class="home-values-img">
+      </div>
+
+      <!-- Value Cards -->
+      <div class="home-values-cards">
+
+        <article class="home-values-card">
+          <div class="home-values-card-accent"></div>
+          <h3 class="home-values-card-title">All-Day Beach Comfort</h3>
+          <p>We engineer every stitch for long beach days — soft, breathable fabrics that move with you from sunrise paddle sessions to sunset bonfires. Because real surf wear never makes you choose between style and ease.</p>
+          <span class="home-values-card-tag">Feel it to believe it</span>
+        </article>
+
+        <article class="home-values-card">
+          <div class="home-values-card-accent"></div>
+          <h3 class="home-values-card-title">Graphics With Attitude</h3>
+          <p>Statement prints rooted in that raw, unapologetic early-2000s surf energy. Bold colour, nostalgic iconography, and the kind of graphic that turns heads on the boardwalk — the best surf clothing brands in the US know the art never stopped.</p>
+          <span class="home-values-card-tag">Wear the era</span>
+        </article>
+
+        <article class="home-values-card">
+          <div class="home-values-card-accent"></div>
+          <h3 class="home-values-card-title">Surf-to-City Layering</h3>
+          <p>Designed for the in-between — the rinse-off, the drive back, the city stop before you're ready to leave the coast behind. Easy layering pieces that carry the ocean vibe wherever the day takes you.</p>
+          <span class="home-values-card-tag">Coast to concrete</span>
+        </article>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Torn postcard paper edge divider -->
+  <div class="home-values-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1440 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Torn edge shadow strip -->
+      <path d="M0,88 L0,28 Q18,22 36,30 T72,24 Q90,28 108,20 T144,26 Q162,22 180,30 T216,24 Q234,20 252,28 T288,22 Q306,26 324,18 T360,24 Q378,20 396,28 T432,22 Q450,18 468,26 T504,20 Q522,24 540,16 T576,22 Q594,18 612,26 T648,20 Q666,16 684,24 T720,18 Q738,22 756,14 T792,20 Q810,16 828,24 T864,18 Q882,14 900,22 T936,16 Q954,20 972,12 T1008,18 Q1026,14 1044,22 T1080,16 Q1098,12 1116,20 T1152,14 Q1170,18 1188,10 T1224,16 Q1242,12 1260,20 T1296,14 Q1314,10 1332,18 T1368,12 Q1386,16 1404,8 T1440,14 L1440,88 Z" fill="var(--bg-dark)" opacity="1"></path>
+      <!-- Navy stroke line along the torn edge -->
+      <path d="M0,28 Q18,22 36,30 T72,24 Q90,28 108,20 T144,26 Q162,22 180,30 T216,24 Q234,20 252,28 T288,22 Q306,26 324,18 T360,24 Q378,20 396,28 T432,22 Q450,18 468,26 T504,20 Q522,24 540,16 T576,22 Q594,18 612,26 T648,20 Q666,16 684,24 T720,18 Q738,22 756,14 T792,20 Q810,16 828,24 T864,18 Q882,14 900,22 T936,16 Q954,20 972,12 T1008,18 Q1026,14 1044,22 T1080,16 Q1098,12 1116,20 T1152,14 Q1170,18 1188,10 T1224,16 Q1242,12 1260,20 T1296,14 Q1314,10 1332,18 T1368,12 Q1386,16 1404,8 T1440,14" fill="var(--bg-dark)" stroke="var(--primary)" stroke-width="1.2" opacity="0.55"></path>
+    </svg>
+  </div>
+
+</section>
+
+<section class="home-cta-section" data-layout-spec="Home-cta">
+  <div class="home-cta-bg-image">
+    <img data-placeholder="home-cta-image-1" data-context="Atmospheric wide-angle ocean surf scene at golden hour, deep navy and teal water with a perfect wave forming, warm light catching the crest, shot from beach level with a slight haze — cinematic, editorial, evocative of early-2000s surf culture nostalgia for a premium surf lifestyle apparel brand" width="1440" height="700" src="/assets/site-home-cta-image-1.webp" alt="Golden hour ocean wave for Surf A Wave Co. beach lifestyle clothing">
+  </div>
+  <div class="home-cta-scrim" aria-hidden="true"></div>
+  <div class="home-cta-container">
+    <div class="home-cta-content">
+      <span class="home-cta-eyebrow">Ride With Us</span>
+      <h2 class="home-cta-heading">Join the <em class="home-cta-script">Wave</em></h2>
+      <p class="home-cta-body">Whether you have questions about our latest drops, want to know more about our beach lifestyle clothing for surfers, or just want to stay close to the stories shaping our world — we're here. Reach out and become part of the Surf A Wave Co. crew.</p>
+      <div class="home-cta-button-wrap">
+        <a href="/contact" class="btn-primary home-cta-btn">Contact Surf A Wave Co.</a>
+      </div>
+    </div>
+  </div>
+  <div class="home-cta-wave-accent" aria-hidden="true">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 120 14" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,7 Q15,2 30,7 T60,7 T90,7 T120,7" stroke="rgba(167,200,218,0.45)" stroke-width="1.5" fill="none"></path>
+    </svg>
+  </div>
+</section>
+  </main>
+  
+  <footer class="site-footer"><div class="footer-wave-top"><svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="#243A54"></path></svg></div><div class="footer-main"><div class="footer-container"><div class="footer-grid"><div class="footer-col footer-brand"><a href="/" class="footer-logo-link"><img src="/assets/business-logo.webp" alt="Surf A Wave Co." class="logo"></a><p class="footer-tagline">Ride the wave. Wear the story.</p><p class="footer-brand-desc">Premium surf-lifestyle apparel crafted for those who live between the tides — where ocean energy meets boutique style.</p><div class="footer-social"><a href="[facebook_handle]" aria-label="Facebook" class="social-link"><i class="fab fa-facebook-f"></i></a><a href="[instagram_handle]" aria-label="Instagram" class="social-link"><i class="fab fa-instagram"></i></a><a href="[whatsapp_handle]" aria-label="WhatsApp" class="social-link"><i class="fab fa-whatsapp"></i></a></div></div><div class="footer-col footer-links"><h3 class="footer-heading"><span class="heading-line"></span>Explore</h3><ul class="footer-nav-list"><li><a href="/style-craft" class="footer-nav-link"><i class="fas fa-chevron-right nav-arrow"></i>Style &amp; Craft</a></li><li><a href="/about" class="footer-nav-link"><i class="fas fa-chevron-right nav-arrow"></i>About</a></li><li><a href="/contact" class="footer-nav-link"><i class="fas fa-chevron-right nav-arrow"></i>Contact</a></li></ul></div><div class="footer-col footer-contact"><h3 class="footer-heading"><span class="heading-line"></span>Get In Touch</h3><ul class="footer-contact-list"><li class="contact-item"><span class="contact-icon"><i class="fas fa-envelope"></i></span><div class="contact-detail"><span class="contact-label">Email Us</span><a href="mailto:[business_email]" class="contact-link">[business_email]</a></div></li><li class="contact-item"><span class="contact-icon"><i class="fas fa-phone"></i></span><div class="contact-detail"><span class="contact-label">Call Us</span><a href="tel:[business_phone]" class="contact-link">[business_phone]</a></div></li><li class="contact-item"><a href="/"><span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span><div class="contact-detail"><span class="contact-label">Find Us</span><span class="contact-text">[business_address]</span></div></a></li></ul></div><div class="footer-col footer-vibe"><h3 class="footer-heading"><span class="heading-line"></span>The Vibe</h3><div class="footer-vibe-card"><div class="wave-icon-wrap"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg" class="wave-svg"><path d="M0,20 C13,8 27,32 40,20 C53,8 67,32 80,20" stroke="#A7C8DA" stroke-width="2.5" fill="none" stroke-linecap="round"></path><path d="M0,28 C13,16 27,40 40,28 C53,16 67,40 80,28" stroke="#5F7F99" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6"></path></svg></div><p class="vibe-text">Born from the ocean. Built for the streets. Worn by those who never stop chasing the horizon.</p><div class="vibe-tags"><span class="vibe-tag">Surf</span><span class="vibe-tag">Style</span><span class="vibe-tag">Culture</span></div></div></div></div></div></div><div class="footer-bottom"><div class="footer-container"><div class="footer-bottom-inner"><p class="footer-copyright">© 2026 Surf A Wave Co.. All rights reserved.</p><div class="footer-legal"><a href="/privacy" class="legal-link">Privacy Policy</a><span class="legal-sep"></span><a href="/terms" class="legal-link">Terms &amp; Conditions</a><span class="separator">|</span>
+            <a href="/return-policy" aria-label="Return Policy">
+              Return Policy
+            </a><span class="legal-sep"></span><a href="/accessibility" class="legal-link">Accessibility</a><span class="legal-sep"></span><a href="https://zappy5.com" target="_blank" class="zappy-attribution">Generated by Zappy</a></div></div></div></div></footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <div data-integration="accessibility:toolbar"></div>
+
+    <script src="/script.js"></script>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+
+    <script id="zappy-navbar-scroll-effect">
+    (function(){
+      var nb=document.querySelector('nav.navbar,.navbar:not(.zappy-catalog-menu)');
+      var cm=document.querySelector('.zappy-catalog-menu,#zappy-catalog-menu');
+      if(!nb)return;
+      var fb='rgba(247,247,245,0.85)';
+      var th=60;
+      var rs=getComputedStyle(document.documentElement);
+      var td=rs.getPropertyValue('--text-dark').trim()||'#1a1a1a';
+      var tl=rs.getPropertyValue('--text-light').trim()||'#ffffff';
+      var st=true?td:tl;
+      nb.style.transition='background 0.3s ease,backdrop-filter 0.3s ease,-webkit-backdrop-filter 0.3s ease,box-shadow 0.3s ease';
+      if(cm)cm.style.transition='background 0.3s ease,backdrop-filter 0.3s ease,-webkit-backdrop-filter 0.3s ease';
+      var neSel='a,.navbar-brand,.navbar-brand a,.dropdown-toggle,.mobile-toggle,.phone-header-btn,.mobile-hamburger-btn,.mobile-close-btn,.mobile-submenu-toggle,.nav-link';
+      var skipCls=['cart-link','login-link','nav-search-toggle','search-toggle'];
+      function sTC(c,clr){var els=c.querySelectorAll(neSel);for(var i=0;i<els.length;i++){var sk=false;if(els[i].closest('.sub-menu')||els[i].closest('.dropdown-menu')){sk=true;}for(var j=0;j<skipCls.length;j++){if(els[i].classList.contains(skipCls[j])){sk=true;break;}}if(!sk)els[i].style.setProperty('color',clr,'important');}}
+      function cTC(c){var els=c.querySelectorAll(neSel);for(var i=0;i<els.length;i++){if(els[i].closest('.sub-menu')||els[i].closest('.dropdown-menu'))continue;els[i].style.removeProperty('color');}}
+      function applyScrolled(){
+        nb.classList.add('scrolled');
+        if(window.innerWidth>768){
+          nb.style.setProperty('--frosted-text',st);
+          nb.style.setProperty('background-image','none','important');
+          nb.style.setProperty('background-color',fb,'important');
+          nb.style.backdropFilter='blur(12px)';nb.style.webkitBackdropFilter='blur(12px)';nb.style.boxShadow='0 2px 16px rgba(0,0,0,0.12)';
+          sTC(nb,st);
+        }
+        if(cm){cm.classList.add('scrolled');if(window.innerWidth>768){cm.style.setProperty('background',fb,'important');cm.style.setProperty('backdrop-filter','blur(12px)','important');cm.style.setProperty('-webkit-backdrop-filter','blur(12px)','important');sTC(cm,st);}}
+      }
+      function onS(){
+        if(window._zappyNavNoDarkHero) return;
+        if(window.innerWidth<=768){nb.classList.remove('scrolled');cTC(nb);if(cm){cm.classList.remove('scrolled');cTC(cm);}return;}
+        var y=window.scrollY||window.pageYOffset;
+        if(y>th){
+          nb.classList.add('scrolled');nb.style.setProperty('background-color',fb,'important');nb.style.setProperty('background-image','none','important');
+          nb.style.setProperty('--frosted-text',st);nb.style.backdropFilter='blur(12px)';nb.style.webkitBackdropFilter='blur(12px)';nb.style.boxShadow='0 2px 16px rgba(0,0,0,0.12)';
+          sTC(nb,st);
+          if(cm){cm.classList.add('scrolled');cm.style.setProperty('background',fb,'important');cm.style.setProperty('backdrop-filter','blur(12px)','important');cm.style.setProperty('-webkit-backdrop-filter','blur(12px)','important');sTC(cm,st);}
+        }else{
+          nb.classList.remove('scrolled');nb.style.setProperty('background-color','transparent','important');nb.style.removeProperty('background-image');
+          nb.style.removeProperty('--frosted-text');nb.style.backdropFilter='none';nb.style.webkitBackdropFilter='none';nb.style.boxShadow='none';
+          cTC(nb);
+          if(cm){cm.classList.remove('scrolled');cm.style.setProperty('background','transparent','important');cm.style.setProperty('backdrop-filter','none','important');cm.style.setProperty('-webkit-backdrop-filter','none','important');cTC(cm);}
+        }
+      }
+      function sLum(rv,gv,bv){rv/=255;gv/=255;bv/=255;rv=rv<=0.03928?rv/12.92:Math.pow((rv+0.055)/1.055,2.4);gv=gv<=0.03928?gv/12.92:Math.pow((gv+0.055)/1.055,2.4);bv=bv<=0.03928?bv/12.92:Math.pow((bv+0.055)/1.055,2.4);return 0.2126*rv+0.7152*gv+0.0722*bv;}
+      window.addEventListener('scroll',onS,{passive:true});
+      window.addEventListener('resize',onS,{passive:true});
+      onS();
+      var heroEl=document.querySelector('section[class*="hero"],[data-hero-type],main>section:first-child');
+      var hasDH=false;
+      if(heroEl){var hCs=getComputedStyle(heroEl);var hBI=hCs.backgroundImage;if(hBI&&hBI!=='none'){if(hBI.indexOf('url(')!==-1){var hM2=hCs.backgroundColor.match(/\d+/g);if(hM2&&hM2.length>=3){hasDH=sLum(parseInt(hM2[0]),parseInt(hM2[1]),parseInt(hM2[2]))<0.4;}else{hasDH=true;}}else if(hBI.indexOf('gradient')!==-1){var cM=hBI.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/g);if(cM&&cM.length>0){var tLm=0;for(var ci=0;ci<cM.length;ci++){var pts=cM[ci].match(/\d+/g);tLm+=sLum(parseInt(pts[0]),parseInt(pts[1]),parseInt(pts[2]));}hasDH=(tLm/cM.length)<0.4;}else{hasDH=true;}}else{hasDH=true;}}else{var hM=hCs.backgroundColor.match(/\d+/g);if(hM&&hM.length>=3){hasDH=sLum(parseInt(hM[0]),parseInt(hM[1]),parseInt(hM[2]))<0.4;}}}
+      if(!hasDH){window.removeEventListener('scroll',onS);window.removeEventListener('resize',onS);applyScrolled();window._zappyNavNoDarkHero=true;}
+    })();
+    </script>
+
+    <script id="zappy-mobile-lang-menu-script">
+    (function() {
+      function initMobileLangMenu() {
+        if (window.innerWidth > 768) {
+          var existingMenu = document.querySelector('.mobile-lang-menu');
+          if (existingMenu) existingMenu.remove();
+          return;
+        }
+        if (document.querySelector('.mobile-lang-menu')) return;
+        var switcher = document.querySelector('.lang-switcher');
+        if (!switcher) return;
+        var dropdown = switcher.querySelector('.lang-switcher-dropdown');
+        if (!dropdown) return;
+        var options = dropdown.querySelectorAll('.lang-option');
+        if (options.length === 0) return;
+        var navMenu = document.getElementById('navMenu') || document.querySelector('.nav-menu') || document.querySelector('nav ul');
+        if (!navMenu) return;
+        var currentLang = document.documentElement.lang || 'en';
+        var langConfigs = {
+          he: {name:'עברית',flag:'https://api.iconify.design/circle-flags/il.svg'},
+          en: {name:'English',flag:'https://api.iconify.design/circle-flags/us.svg'},
+          ar: {name:'العربية',flag:'https://api.iconify.design/circle-flags/sa.svg'},
+          fr: {name:'Français',flag:'https://api.iconify.design/circle-flags/fr.svg'},
+          es: {name:'Español',flag:'https://api.iconify.design/circle-flags/es.svg'},
+          de: {name:'Deutsch',flag:'https://api.iconify.design/circle-flags/de.svg'},
+          ru: {name:'Русский',flag:'https://api.iconify.design/circle-flags/ru.svg'},
+          zh: {name:'中文',flag:'https://api.iconify.design/circle-flags/cn.svg'},
+          ja: {name:'日本語',flag:'https://api.iconify.design/circle-flags/jp.svg'},
+          pt: {name:'Português',flag:'https://api.iconify.design/circle-flags/br.svg'},
+          it: {name:'Italiano',flag:'https://api.iconify.design/circle-flags/it.svg'},
+          ko: {name:'한국어',flag:'https://api.iconify.design/circle-flags/kr.svg'}
+        };
+        var container = document.createElement('div');
+        container.className = 'mobile-lang-menu';
+        var currentConfig = langConfigs[currentLang] || {name:currentLang,flag:''};
+        var toggleBtn = document.createElement('button');
+        toggleBtn.className = 'mobile-lang-toggle';
+        toggleBtn.type = 'button';
+        var currentFlagHtml = currentConfig.flag ? '<img src="' + currentConfig.flag + '" width="20" height="20" alt="" style="border-radius:50%;margin-right:8px;margin-left:8px;">' : '';
+        toggleBtn.innerHTML = currentFlagHtml + currentConfig.name;
+        container.appendChild(toggleBtn);
+        var optionsDiv = document.createElement('div');
+        optionsDiv.className = 'mobile-lang-options';
+        var currentLink = document.createElement('a');
+        currentLink.className = 'mobile-lang-option active';
+        currentLink.href = '#';
+        currentLink.innerHTML = currentFlagHtml + currentConfig.name;
+        optionsDiv.appendChild(currentLink);
+        options.forEach(function(opt) {
+          var link = document.createElement('a');
+          link.className = 'mobile-lang-option';
+          link.href = opt.getAttribute('href');
+          link.innerHTML = opt.innerHTML;
+          optionsDiv.appendChild(link);
+        });
+        container.appendChild(optionsDiv);
+        navMenu.appendChild(container);
+        toggleBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleBtn.classList.toggle('expanded');
+          optionsDiv.classList.toggle('expanded');
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileLangMenu); }
+      else { initMobileLangMenu(); }
+      window.addEventListener('resize', function() { clearTimeout(window._mlrt); window._mlrt = setTimeout(initMobileLangMenu, 250); });
+    })();
+    </script>
+</body>
+</html>
